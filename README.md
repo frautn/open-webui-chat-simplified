@@ -3,7 +3,7 @@ How to build a custom docker image of Open WebUI, modifying the layout, such as 
 
 A guide for building a new docker image with Open WebUI modified according to projects' needs. This example produces the docker image that is publicly available at `ghcr.io/frautn/open-webui-chat-simplified:v0.11.0`.
 
-The user only sees a stripped chat interface. No sidebar, no top bar, and stripped down tools.
+The user only sees a stripped chat interface. No sidebar, no top bar, and stripped down tools (no select models, no dictate, etc).
 
 <img src="./chat_01.png" alt="App Logo" width="600" />
 

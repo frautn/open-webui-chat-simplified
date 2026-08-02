@@ -4,6 +4,11 @@ How to build a custom docker image of Open WebUI, modifying the layout, such as 
 A guide for building a new docker image with Open WebUI modified according to projects' needs. This example produces the docker image that is publicly available at `ghcr.io/frautn/open-webui-chat-simplified:v0.11.0`.
 
 
+<img src="./chat_01.png" alt="App Logo" width="300" />
+
+<img src="./chat_02.png" alt="App Logo" width="300" />
+
+
 
 1. **Clone the official repo:**
 

@@ -95,8 +95,8 @@ Build for ARM (handy for cloud instances):
 # Ensure buildx builder is ready
 docker buildx create --use
 
-docker buildx build \
-  --platform linux/arm64 \
+docker buildx build  --platform linux/arm64 \
+  --build-arg NODE_OPTIONS="--max-old-space-size=16384" \
   -t open-webui-chat-simplified:v0.11.0-arm .
 ```
 

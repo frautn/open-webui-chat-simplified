@@ -89,6 +89,17 @@ docker build -t open-webui-chat-simplified:v0.11.0 .
 
 Tag matches the Open WebUI version used for this custom image.
 
+Build for ARM (handy for cloud instances):
+
+```bash
+# Ensure buildx builder is ready
+docker buildx create --use
+
+docker buildx build \
+  --platform linux/arm64 \
+  -t open-webui-chat-simplified:v0.11.0-arm .
+```
+
 7. **Run your container for testing:**
 
 ```bash

@@ -97,7 +97,8 @@ docker buildx create --use
 
 docker buildx build  --platform linux/arm64 \
   --build-arg NODE_OPTIONS="--max-old-space-size=16384" \
-  -t open-webui-chat-simplified:v0.11.0-arm .
+  -t open-webui-chat-simplified:v0.11.0-arm \
+  --load .
 ```
 
 7. **Run your container for testing:**

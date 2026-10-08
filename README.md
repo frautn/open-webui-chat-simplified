@@ -1,4 +1,7 @@
 # open-webui-chat-simplified
+
+Updated for v0.11.4
+
 How to build a custom docker image of Open WebUI, modifying the layout, such as removing the sidebar and removing buttons from the chat page.
 
 A guide for building a new docker image with Open WebUI modified according to projects' needs. This example produces the docker image that is publicly available at `ghcr.io/frautn/open-webui-chat-simplified:v0.11.0`.
@@ -81,10 +84,78 @@ Open `src/lib/components/chat/MessageInput/InputMenu.svelte` and remove the entr
 </Tooltip>
 ```
 
-6. **Build your modified Docker image:**
+6. **Remove Model Selector:**
 
+The user can't change the model.
+
+Open `src/lib/components/chat/ModelSelector.svelte` and remove
+
+```html
+<div class="flex min-w-0 max-w-full flex-col items-start">
+	<div class="flex min-w-0 max-w-full">
+		<div class="min-w-0 max-w-full overflow-hidden">
+			<div class="min-w-0 max-w-full">
+				<Selector
+					bind:this={selector}
+					id="model"
+					placeholder={$i18n.t('Select a model')}
+					items={$models.map((model) => ({
+						value: model.id,
+						label: resolveLocalizedModelName(model, $i18n.language),
+						model: model
+					}))}
+					{pinModelHandler}
+					{className}
+					{triggerClassName}
+					{placement}
+					{align}
+					{showSetDefault}
+					onSetDefault={saveDefaultModel}
+					multipleEnabled={$user?.role === 'admin' ||
+						($user?.permissions?.chat?.multiple_models ?? true)}
+					{disabled}
+					bind:compareEnabled={compareModels}
+					bind:values={selectedModels}
+				/>
+			</div>
+		</div>
+	</div>
+</div>
+```
+
+7. **Remove Suggestions:**
+
+This could be removed in settings, but this also works.
+
+Open `src/lib/components/chat/Placeholder.svelte` and remove:
+
+```html
+{:else}
+		<div class="mx-auto max-w-2xl mt-2" in:fade={{ duration: 200, delay: 200 }}>
+			<div class="mx-5">
+				<Suggestions suggestionPrompts={selectedSuggestionPrompts} inputValue={prompt} {onSelect} />
+			</div>
+		</div>
+```
+
+Open `src/lib/components/chat/ChatPlaceholder.svelte` and remove:
+
+```html
+<div class=" w-full" in:fade={{ duration: 200, delay: 300 }}>
+  <Suggestions
+    className="grid grid-cols-2"
+    suggestionPrompts={selectedSuggestionPrompts}
+    {onSelect}
+  />
+</div>
+```
+
+
+8. **Build your modified Docker image:**
+
+IF NOT IN ARM:
 ```bash
-docker build -t open-webui-chat-simplified:v0.11.0 .
+docker build -t open-webui-chat-simplified:v0.11.4 .
 ```
 
 Tag matches the Open WebUI version used for this custom image.
@@ -97,28 +168,13 @@ docker buildx create --use
 
 docker buildx build  --platform linux/arm64 \
   --build-arg NODE_OPTIONS="--max-old-space-size=16384" \
-  -t open-webui-chat-simplified:v0.11.0-arm \
+  -t open-webui-chat-simplified:v0.11.4-arm \
   --load .
-```
-
-7. **Run your container for testing:**
-
-```bash
-docker run -d -p 3000:8080 \
-  -v open-webui:/app/backend/data \
-  --name open-webui-custom \
-  --restart always \
-  open-webui-no-sidebar:latest
-```
-
-Remove this container:  
-```bash
-docker rm -f open-webui-custom
 ```
 
 ---
 
-8. **Push the docker image:**
+9. **Push the docker image:**
 
 To push your custom Docker image to **GitHub Container Registry (GHCR)**, follow these steps:
 
@@ -153,16 +209,16 @@ Tag your locally built image using the `ghcr.io` naming structure:
 `ghcr.io/YOUR_GITHUB_USERNAME/IMAGE_NAME:TAG`
 
 ```bash
-docker tag open-webui-chat-simplified:v0.11.0 ghcr.io/YOUR_GITHUB_USERNAME/open-webui-chat-simplified:v0.11.0
+docker tag open-webui-chat-simplified:v0.11.4-arm ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
 ```
 
-*(Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username, in lowercase).*
+*(Replace `frautn` with your actual GitHub username, in lowercase).*
 
 
 #### Step 4: Push the Image to GHCR
 
 ```bash
-docker push ghcr.io/YOUR_GITHUB_USERNAME/open-webui-chat-simplified:v0.11.0
+docker push ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
 ```
 
 #### Step 5: Make Package Public
@@ -177,18 +233,6 @@ By default, newly pushed packages on GHCR are set to **Private**. To pull it on 
 Now you can pull it on your server without logging in:
 
 ```bash
-docker pull ghcr.io/YOUR_GITHUB_USERNAME/open-webui-chat-simplified:v0.11.0
-
-```
-
----
-
-9. **Run your container:**
-```bash
-docker run -d -p 3000:8080 \
-  -v open-webui:/app/backend/data \
-  --name open-webui \
-  --restart always \
-  ghcr.io/YOUR_GITHUB_USERNAME/open-webui-chat-simplified:v0.11.0
+docker pull ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
 
 ```

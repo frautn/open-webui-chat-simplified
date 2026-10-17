@@ -1,6 +1,6 @@
 # open-webui-chat-simplified
 
-Updated for v0.11.4
+Updated for v0.12.3
 
 How to build a custom docker image of Open WebUI, modifying the layout, such as removing the sidebar and removing buttons from the chat page.
 
@@ -17,8 +17,8 @@ Be careful though, even if not shown in the page, are accessible through a direc
 1. **Clone the official repo:**
 
 ```bash
-git clone https://github.com/open-webui/open-webui.git open-webui-custom
-cd open-webui-custom
+git clone https://github.com/open-webui/open-webui.git open-webui-custom-0-12-3
+cd open-webui-custom-0-12-3
 
 ```
 

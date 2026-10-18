@@ -162,7 +162,7 @@ Open `src/lib/components/chat/ChatPlaceholder.svelte` and remove:
 
 IF NOT IN ARM:
 ```bash
-docker build -t open-webui-chat-simplified:v0.11.4 .
+docker build -t open-webui-chat-simplified:v0.12.3 .
 ```
 
 Tag matches the Open WebUI version used for this custom image.
@@ -175,7 +175,7 @@ docker buildx create --use
 
 docker buildx build  --platform linux/arm64 \
   --build-arg NODE_OPTIONS="--max-old-space-size=16384" \
-  -t open-webui-chat-simplified:v0.11.4-arm \
+  -t open-webui-chat-simplified:v0.12.3-arm \
   --load .
 ```
 
@@ -216,7 +216,7 @@ Tag your locally built image using the `ghcr.io` naming structure:
 `ghcr.io/YOUR_GITHUB_USERNAME/IMAGE_NAME:TAG`
 
 ```bash
-docker tag open-webui-chat-simplified:v0.11.4-arm ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
+docker tag open-webui-chat-simplified:v0.12.3-arm ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
 ```
 
 *(Replace `frautn` with your actual GitHub username, in lowercase).*
@@ -225,7 +225,7 @@ docker tag open-webui-chat-simplified:v0.11.4-arm ghcr.io/frautn/open-webui-chat
 #### Step 4: Push the Image to GHCR
 
 ```bash
-docker push ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
+docker push ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
 ```
 
 #### Step 5: Make Package Public

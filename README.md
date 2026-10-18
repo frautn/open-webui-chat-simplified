@@ -240,6 +240,6 @@ By default, newly pushed packages on GHCR are set to **Private**. To pull it on 
 Now you can pull it on your server without logging in:
 
 ```bash
-docker pull ghcr.io/frautn/open-webui-chat-simplified:v0.11.4-arm
+docker pull ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
 
 ```

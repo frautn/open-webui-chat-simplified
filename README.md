@@ -14,13 +14,20 @@ The user only sees a stripped chat interface. No sidebar, no top bar, and stripp
 
 Be careful though, even if not shown in the page, are accessible through a direct link. Further tuning is needed to address this, if relevant.
 
-1. **Clone the official repo:**
+0. **Fork the official repo**
 
-```bash
-git clone https://github.com/open-webui/open-webui.git open-webui-custom-0-12-3
-cd open-webui-custom-0-12-3
+**There is no need to execute this step anymore.**
 
-```
+The forked repository is frautn/open-webui-custom .
+
+
+1.1 **Sync frautn/open-webui-custom**
+
+Sync the main branch of the forked repository.
+
+1.2 **Create a new branch for each version**
+
+git checkout -b chat-simplified-v0-12-3
 
 2. **Remove the sidebar in code:**  
 

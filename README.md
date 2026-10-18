@@ -167,6 +167,8 @@ docker build -t open-webui-chat-simplified:v0.12.3 .
 
 Tag matches the Open WebUI version used for this custom image.
 
+Compare the Dockerfile of the newly created branch (merged from main) with the Dockerfile of a previous version. Modify accordingly.
+
 Build for ARM (handy for cloud instances):
 
 ```bash

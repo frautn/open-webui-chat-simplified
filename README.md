@@ -1,10 +1,10 @@
 # open-webui-chat-simplified
 
-Updated for v0.12.3
+Updated for v0.12.4
 
 How to build a custom docker image of Open WebUI, modifying the layout, such as removing the sidebar and removing buttons from the chat page.
 
-A guide for building a new docker image with Open WebUI modified according to projects' needs. This example produces the docker image that is publicly available at `ghcr.io/frautn/open-webui-chat-simplified:v0.11.0`.
+A guide for building a new docker image with Open WebUI modified according to projects' needs. This example produces the docker image that is publicly available at `ghcr.io/frautn/open-webui-chat-simplified:v0.12.4`.
 
 The user only sees a stripped chat interface. No sidebar, no top bar, and stripped down tools (no select models, no dictate, etc).
 
@@ -27,7 +27,7 @@ Sync the main branch of the forked repository.
 
 1.2 **Create a new branch for each version**
 
-git checkout -b chat-simplified-v0-12-3
+git checkout -b chat-simplified-v0-12-4
 
 2. **Remove the sidebar in code:**  
 
@@ -162,7 +162,7 @@ Open `src/lib/components/chat/ChatPlaceholder.svelte` and remove:
 
 IF NOT IN ARM:
 ```bash
-docker build -t open-webui-chat-simplified:v0.12.3 .
+docker build -t open-webui-chat-simplified:v0.12.4 .
 ```
 
 Tag matches the Open WebUI version used for this custom image.
@@ -177,7 +177,7 @@ docker buildx create --use
 
 docker buildx build  --platform linux/arm64 \
   --build-arg NODE_OPTIONS="--max-old-space-size=16384" \
-  -t open-webui-chat-simplified:v0.12.3-arm \
+  -t open-webui-chat-simplified:v0.12.4-arm \
   --load .
 ```
 
@@ -218,7 +218,7 @@ Tag your locally built image using the `ghcr.io` naming structure:
 `ghcr.io/YOUR_GITHUB_USERNAME/IMAGE_NAME:TAG`
 
 ```bash
-docker tag open-webui-chat-simplified:v0.12.3-arm ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
+docker tag open-webui-chat-simplified:v0.12.4-arm ghcr.io/frautn/open-webui-chat-simplified:v0.12.4-arm
 ```
 
 *(Replace `frautn` with your actual GitHub username, in lowercase).*
@@ -227,7 +227,7 @@ docker tag open-webui-chat-simplified:v0.12.3-arm ghcr.io/frautn/open-webui-chat
 #### Step 4: Push the Image to GHCR
 
 ```bash
-docker push ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
+docker push ghcr.io/frautn/open-webui-chat-simplified:v0.12.4-arm
 ```
 
 #### Step 5: Make Package Public
@@ -242,6 +242,6 @@ By default, newly pushed packages on GHCR are set to **Private**. To pull it on 
 Now you can pull it on your server without logging in:
 
 ```bash
-docker pull ghcr.io/frautn/open-webui-chat-simplified:v0.12.3-arm
+docker pull ghcr.io/frautn/open-webui-chat-simplified:v0.12.4-arm
 
 ```
